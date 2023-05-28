@@ -42,6 +42,7 @@ class CsvHandler:
             wb: x.Book = x.open_workbook(f)
             sh = wb.sheet_by_index(0)
             f_name = f.split("\\")[-1].split(".")[0]
+            temp = f_name
 
             with open(
                 f"{FileDir.CSV_DIR}\\{f_name}.csv", "w", newline="", encoding="utf-8"
@@ -49,7 +50,7 @@ class CsvHandler:
                 wr = csv.writer(f, delimiter=",", quoting=csv.QUOTE_ALL)
                 for rx in range(sh.nrows):
                     wr.writerow(sh.row_values(rx))
-        print("DONE: [card_name].csv Generated")
+            print(f"DONE: {temp}.csv Generated")
 
 
 class PolarsHandler:
@@ -89,8 +90,14 @@ class PolarsHandler:
             return df.filter((pl.col(start) != "") & (pl.col(end) != "")).slice(1)
 
         return filter_df(
-            self.hana_df, Values.HANA_NULL_START, Values.HANA_NULL_END
-        ), filter_df(self.shin_df, Values.SHIN_NULL_START, Values.SHIN_NULL_END)
+            df=self.hana_df,
+            start=Values.HANA_NULL_START,
+            end=Values.HANA_NULL_END,
+        ), filter_df(
+            df=self.shin_df,
+            start=Values.SHIN_NULL_START,
+            end=Values.SHIN_NULL_END,
+        )
 
     def get_output(self):
         hana_filtered, shin_filtered = self.implFilter()
@@ -122,7 +129,7 @@ class PolarsHandler:
             query = "|".join(
                 map(re.escape, sorted(Values.KEYWORD, key=len, reverse=True))
             )
-            return df.with_column(
+            return df.with_columns(
                 pl.col(business_name_col).str.contains(query).alias("result")
             )
 

@@ -1,6 +1,6 @@
 import os
 import httpx
-from bs4 import BeautifulSoup
+# from bs4 import BeautifulSoup
 
 from src.constant import FileDir
 
@@ -21,7 +21,7 @@ class Parser:
             "https://www.hanacard.co.kr/OPM05000000C.web?schID=pcd&mID=OPM05000000C"
         )
         r = httpx.get(target)
-        soup = BeautifulSoup(r.text, "html.parser")
-        self.check_dir()
-        with open(f"{FileDir.HTMLS_DIR}\\hana.html", "w", encoding="utf-8") as f:
-            f.write(soup.prettify())
+        # soup = BeautifulSoup(r.text, "html.parser")
+        # self.check_dir()
+        # with open(f"{FileDir.HTMLS_DIR}\\hana.html", "w", encoding="utf-8") as f:
+        #     f.write(soup.prettify())

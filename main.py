@@ -32,8 +32,8 @@ def runner(t: RunType):
 
 
 def main():
-    # runner(get_run_type())
-    runner(RunType.AUTO_UPLOAD)
+    runner(get_run_type())
+    # runner(RunType.AUTO_UPLOAD)
 
 
 if __name__ == "__main__":
