@@ -85,6 +85,10 @@ class PolarsHandler:
                     self.dfs.append(self.shin_df)
 
     def implFilter(self):
+        if len(self.dfs) < 1 or self.hana_df == None or self.shin_df == None:
+            print("files are not generated")
+            return
+
         for df in self.dfs:
             df.columns = [str(i) for i in range(df.width)]
 
