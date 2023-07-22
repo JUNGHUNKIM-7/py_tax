@@ -87,7 +87,7 @@ class PolarsHandler:
     def implFilter(self):
         if len(self.dfs) < 1 or self.hana_df.is_empty() or self.shin_df.is_empty():
             print("files are not generated")
-            return
+            return None
 
         for df in self.dfs:
             df.columns = [str(i) for i in range(df.width)]
@@ -106,6 +106,10 @@ class PolarsHandler:
         )
 
     def get_output(self):
+        if self.implFilter() == None:
+            print("get_ouput is not implemented")
+            return
+
         hana_filtered, shin_filtered = self.implFilter()
 
         # generate cols for df[arg]
