@@ -49,7 +49,7 @@ class Values:
     SHIN_BNAME_COL = "5"
     HANA_BNUM_COL = "5"
     SHIN_BNUM_COL = "10"
-    KEYWORD = "주유소", "통신요금"
+    KEYWORD = "주유소", "통신요금", "도로공사"
 
 
 class SelectionColumns:

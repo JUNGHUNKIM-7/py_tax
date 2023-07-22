@@ -57,6 +57,8 @@ class PolarsHandler:
     def __init__(self):
         self.CSV_FILES = FileDirHandler(FileType.CSV).files
         self.dfs: list[pl.DataFrame] = []
+        self.hana_df = None
+        self.shin_df = None
 
         def read_csv_files(f_name: str):
             return pl.read_csv(

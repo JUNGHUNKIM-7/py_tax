@@ -1,5 +1,4 @@
 from src.constant import *
-from src.selenium_handler import SeleniumHandler
 from src.df_handler import PolarsHandler, CsvHandler
 
 
@@ -19,21 +18,17 @@ def runner(t: RunType):
     match t:
         case RunType.GEN_DATA:
             f = CsvHandler()
-            d = PolarsHandler()
             f.gen_csv()
+            d = PolarsHandler()
             d.get_output()
         case RunType.AUTO_UPLOAD:
-            s = SeleniumHandler()
-            # s.check_driver()
-            s.get_filtered_rows()
-            s.run_hometax()
+            pass
         case _:
             raise Exception("Invalid RunType")
 
 
 def main():
     runner(get_run_type())
-    # runner(RunType.AUTO_UPLOAD)
 
 
 if __name__ == "__main__":
